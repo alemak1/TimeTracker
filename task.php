@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 }
 
-/*CODE FOR HANDLING VALIDATION OF DATE INPUT: elseif(count($dateMatch != 3) 
+/*CODE FOR HANDLING VALIDATION OF DATE INPUT: elseif(count($dateMatch) != 3) 
         || strlen($dateMatch[0]) != 2 
         || strlen($dateMatch[1]) != 2 
         || strlen($dateMatch[2]) != 4 
