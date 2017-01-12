@@ -12,6 +12,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $date = filter_input(INPUT_POST,'date',FILTER_SANITIZE_STRING);
     $time = filter_input(INPUT_POST,'time',FILTER_SANITIZE_NUMBER_INT);
 
+    // $dateMatch = explode('/',$date);
+    // var_dump($dateMatch);
 
     if(empty($project_id) || empty($title) || empty($date) || empty($time)){
         $error_message = "Please fill in the required fields: Project ID, Title, Date, Time";
@@ -24,6 +26,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
 }
+
+/*CODE FOR HANDLING VALIDATION OF DATE INPUT: elseif(count($dateMatch != 3) 
+        || strlen($dateMatch[0]) != 2 
+        || strlen($dateMatch[1]) != 2 
+        || strlen($dateMatch[2]) != 4 
+        || !checkdate($dateMatch[0],$dateMatch[1],$dateMatch[2])){ 
+            
+            $error_message = "Invalid date";
+    }*/
 
 
 include 'inc/header.php';
