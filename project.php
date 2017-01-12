@@ -11,8 +11,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(empty($title) || empty($category)){
         $error_message = "Please fill in the required fields: Title, Category";
     }else{
-        echo "title = $title <br />";
-        echo "category = $category <br/>";
+        if(add_project($title,$category)){
+            header("Location: project_list.php");
+            exit;
+        }else{
+            $error_message = "Could not add project";
+        }
     }
 }
 
