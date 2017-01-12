@@ -12,9 +12,7 @@ include 'inc/header.php';
         <div class="col col-70-md col-60-lg col-center">
 
             <h1 class="actions-header">Task List</h1>
-            <?php
 
-            ?>
             <div class="actions-item">
                 <a class="actions-link" href="task.php">
                     <span class="actions-icon">
