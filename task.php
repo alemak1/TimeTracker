@@ -6,7 +6,12 @@ $page = "tasks";
 
 $project_id = $title = $date = $time = '';
 
+if(isset($_GET['id'])){
+    list($task_id,$title,$date,$time,$project_id) = get_task(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $task_id = filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT);
     $project_id = filter_input(INPUT_POST,'project_id',FILTER_SANITIZE_NUMBER_INT);
     $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_STRING);
     $date = filter_input(INPUT_POST,'date',FILTER_SANITIZE_STRING);
@@ -18,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(empty($project_id) || empty($title) || empty($date) || empty($time)){
         $error_message = "Please fill in the required fields: Project ID, Title, Date, Time";
     }else{
-        if(add_task($project_id,$title,$date,$time)){
+        if(add_task($project_id,$title,$date,$time,$task_id)){
             header("Location: task_list.php");
             exit;
         }else{
