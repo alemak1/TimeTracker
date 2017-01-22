@@ -26,6 +26,12 @@ include 'inc/header.php';
     <div class="col-container page-container">
         <div class="col col-70-md col-60-lg col-center">
             <h1 class="actions-header">Project List</h1>
+            <?php
+            if(isset($_GET['msg'])){
+                $error_message = trim(filter_input(INPUT_GET,'msg',FILTER_SANITIZE_STRING));
+            }
+            ?>
+
             <div class="actions-item">
                 <a class="actions-link" href="project.php">
                 <span class="actions-icon">
