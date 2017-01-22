@@ -23,8 +23,14 @@ function get_task_list($filter = null){
 	$where = '';
 
 	if(is_array($filter)){
-		if($filter[0] == 'project'){
-			$where = ' WHERE projects.project_id = ?';
+		switch($filter[0]){
+			case 'project':
+				$where = ' WHERE projects.project_id = ?';
+				break;
+			case 'category':
+				$where = ' WHERE category = ?';
+				break;
+
 		}
 	}
 
@@ -37,7 +43,7 @@ function get_task_list($filter = null){
 	try{
 		$results = $db->prepare($sql . $where . $orderBy);
 		if(is_array($filter)){
-			$results->bindValue(1,$filter[1],PDO::PARAM_INT);
+			$results->bindValue(1,$filter[1]);
 		}
 		$results->execute();
 	}catch(Exception $e){
