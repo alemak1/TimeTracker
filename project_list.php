@@ -4,6 +4,21 @@ require 'inc/functions.php';
 $page = "projects";
 $pageTitle = "Project List | Time Tracker";
 
+if(isset($_POST['delete'])){
+    if(delete_project(filter_input(INPUT_POST,'delete',FILTER_SANITIZE_NUMBER_INT))){
+        header('location:project_list.php?msg=Project+Deleted');
+        exit;
+    }else{
+        header('location:project_list.php?msg=Unable+to+Delete+Project');
+        exit;
+    }
+}
+
+if(isset($_GET['msg'])){
+    $error_message = trim(filter_input(INPUT_GET,'msg',FILTER_SANITIZE_STRING));
+}
+
+
 include 'inc/header.php';
 ?>
 <div class="section catalog random">
