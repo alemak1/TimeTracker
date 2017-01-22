@@ -7,7 +7,7 @@ $page = "tasks";
 $project_id = $title = $date = $time = '';
 
 if(isset($_GET['id'])){
-    list($task_id,$title,$date,$time,$project_id) = get_task(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+    list($task_id,$title,$date,$time,$project_id) = get_task(filter_input(INPUT_GET,'id',FILTER_SANITIZE_STRING));
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -99,6 +99,11 @@ include 'inc/header.php';
                         <td><input type="text" id="time" name="time" value="<?php echo htmlspecialchars($time); ?>" /> minutes</td>
                     </tr>
                 </table>
+                <?php
+                    if(!empty($task_id)){
+                        echo "<input type='hidden' name='id' value='$task_id' />";
+                    }
+                ?>
                 <input class="button button--primary button--topic-php" type="submit" value="Submit" />
             </form>
         </div>

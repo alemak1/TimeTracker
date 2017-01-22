@@ -114,7 +114,7 @@ function add_task($project_id, $title, $date, $time,$task_id = null){
 	include 'connection.php';
 
 	if($task_id){
-		$sql = 'UPDATE task SET project_id = ?, title = ?, date = ?, time = ?' 
+		$sql = 'UPDATE tasks SET project_id = ?, title = ?, date = ?, time = ?' 
 				. ' WHERE task_id = ?';
 	}else{
 		$sql = 'INSERT INTO tasks(project_id,title,date,time) VALUES(?,?,?,?)';
@@ -144,7 +144,7 @@ function add_task($project_id, $title, $date, $time,$task_id = null){
 function get_task($task_id){
 	include 'connection.php';
 
-	$sql = "SELECT task_id,title,date,time,project_id FROM tasks WHERE task_id = ?";
+	$sql = 'SELECT task_id,title,date,time,project_id FROM tasks WHERE task_id = ?';
 
 	try{
 		$results = $db->prepare($sql);
