@@ -25,7 +25,7 @@ include 'inc/header.php';
               <ul class="items">
                <?php
                     foreach(get_task_list() as $item){
-                        echo "<li>". $item['title'] . "</li>";
+                        echo "<li><a href='task.php?id='". $item['task_id'] . "'>". $item['title'] . "</a></li>";
                     }
                 ?> 
               </ul>
