@@ -4,6 +4,12 @@ require 'inc/functions.php';
 $pageTitle = "Project | Time Tracker";
 $page = "projects";
 
+
+if(isset($_GET['id']){
+    $project_id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
+    list($project_id,$title,$category) = get_project($project_id);
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_STRING);
     $category = filter_input(INPUT_POST,'title',FILTER_SANITIZE_STRING);
