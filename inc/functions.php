@@ -20,14 +20,25 @@ function get_task_list($filter = null){
 
 	$sql = "SELECT tasks.*,projects.title AS project FROM tasks INNER JOIN projects ON projects.project_id = tasks.project_id";
 
-	$orderBy = 'ORDER BY date DESC';
+	$where = '';
+
+	if(is_array($filter)){
+		if($filter[0] == 'project'){
+			$where = ' WHERE projects.project_id = ?';
+		}
+	}
+
+	$orderBy = ' ORDER BY date DESC';
 
 	if($filter){
 		$orderBy = ' ORDER BY projects.title ASC, date DESC';
 	}
 
 	try{
-		$results = $db->prepare($sql . $orderBy);
+		$results = $db->prepare($sql . $where . $orderBy);
+		if(is_array($filter)){
+			$results->bindValue(1,$filter[1],PDO::PARAM_INT);
+		}
 		$results->execute();
 	}catch(Exception $e){
 		echo "Error: " . $e->getMessage() . "</br>";
