@@ -14,6 +14,10 @@ if(isset($_POST['delete'])){
     }
 }
 
+if(isset($_GET['msg'])){
+    $error_message = trim(filter_input(INPUT_GET,'msg',FILTER_SANITIZE_STRING));
+}
+
 include 'inc/header.php';
 ?>
 <div class="section catalog random">
@@ -23,6 +27,9 @@ include 'inc/header.php';
 
             <h1 class="actions-header">Task List</h1>
 
+
+          
+
             <div class="actions-item">
                 <a class="actions-link" href="task.php">
                     <span class="actions-icon">
@@ -31,11 +38,18 @@ include 'inc/header.php';
                 Add Task</a>
             </div>
 
+                <?php
+                    if(isset($error_message)){
+                        echo "<p class='message'>$error_message</p>";
+                    }
+
+                ?>
+
             <div class="form-container">
               <ul class="items">
                <?php
                     foreach(get_task_list() as $item){
-                        echo "<li><a href='task.php?id=". $item['task_id'] . "'>". $item['title'] . "</a><";
+                        echo "<li><a href='task.php?id=". $item['task_id'] . "'>". $item['title'] . "</a>";
                         echo "<form method='post' action='task_list.php'> \n";
                         echo "<input type='hidden' value='". $item['task_id'] ."' name='delete' />";
                         echo "<input type='submit' class='button--delete' value='Delete' />\n";
