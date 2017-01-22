@@ -60,15 +60,25 @@ function get_task_list($filter = null){
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function add_project($title, $category){
+function add_project($title, $category,$project_id = null){
 	include 'connection.php';
 
-	$sql = "INSERT INTO projects(title,category) VALUES(?,?)";
+	if($project_id){
+		$sql = 'UPDATE projects SET title = ?, category = ? WHERE project_id = ?';
+	}else{
+		$sql = "INSERT INTO projects(title,category) VALUES(?,?)";
+	}
+
 
 	try{
 		$results = $db->prepare($sql);
 		$results->bindValue(1,$title,PDO::PARAM_STR);
 		$results->bindValue(2,$category,PDO::PARAM_STR);
+		
+		if($project_id){
+			$results->bindValue(3,$project_id, PDO::PARAM_INT);
+		}
+
 		$results->execute();
 
 	}catch(Exception $e){
