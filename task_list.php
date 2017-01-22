@@ -4,6 +4,16 @@ require 'inc/functions.php';
 $page = "tasks";
 $pageTitle = "Task List | Time Tracker";
 
+if(isset($_POST['delete'])){
+    if(delete_task(filter_input(INPUT_POST,'delete',FILTER_SANITIZE_NUMBER_INT))){
+        header('location:task_list.php?msg=Task+Deleted');
+        exit;
+    }else{
+        header('location:task_list.php?msg=Unable+to+Delete+Task');
+        exit;
+    }
+}
+
 include 'inc/header.php';
 ?>
 <div class="section catalog random">
