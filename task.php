@@ -48,7 +48,16 @@ include 'inc/header.php';
 <div class="section page">
     <div class="col-container page-container">
         <div class="col col-70-md col-60-lg col-center">
-            <h1 class="actions-header">Add Task</h1>
+            <h1 class="actions-header">
+            <?php
+
+            if(!empty($task_id)){
+                echo 'Update';
+            }else{
+                echo 'Add';
+            }
+
+            ?> Task</h1>
 
               <?php
                     if(isset($error_message)){
