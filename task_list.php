@@ -25,7 +25,11 @@ include 'inc/header.php';
               <ul class="items">
                <?php
                     foreach(get_task_list() as $item){
-                        echo "<li><a href='task.php?id=". $item['task_id'] . "'>". $item['title'] . "</a></li>";
+                        echo "<li><a href='task.php?id=". $item['task_id'] . "'>". $item['title'] . "</a><";
+                        echo "<form method='post' action='task_list.php'> \n";
+                        echo "<input type='hidden' value='". $item['task_id'] ."' name='delete' />";
+                        echo "<input type='submit' class='button--delete' value='Delete' />\n";
+                        echo "</li>";
                     }
                 ?> 
               </ul>
