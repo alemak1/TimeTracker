@@ -26,7 +26,7 @@ include 'inc/header.php';
     <div class="col-container page-container">
         <div class="col col-70-md col-60-lg col-center">
             <h1 class="actions-header">Project List</h1>
-            <?php
+           <?php
             if(isset($_GET['msg'])){
                 $error_message = trim(filter_input(INPUT_GET,'msg',FILTER_SANITIZE_STRING));
             }
@@ -45,7 +45,13 @@ include 'inc/header.php';
                 <ul class="items">
                <?php
                     foreach(get_project_list() as $item){
-                        echo "<li><a href='project.php?id=". $item['project_id'] . "'>". $item['title'] . "</a></li>";
+                        echo "<li><a href='project.php?id=". $item['project_id'] . "'>". $item['title'] . "</a>";
+
+                        echo "<form method='post' action='project_list.php' onsubmit=\" return confirm('Are you sure you 
+                        want to delete this project?'); \" > \n";
+                        echo "<input type='hidden' value='". $item['project_id'] ."' name='delete' />";
+                        echo "<input type='submit' class='button--delete' value='Delete' />\n";
+                        echo "</li>";
                     }
                 ?> 
                 </ul>
